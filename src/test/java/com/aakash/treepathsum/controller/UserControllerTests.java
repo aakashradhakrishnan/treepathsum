@@ -46,7 +46,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void registerEXistingUserTests(){
+    public void registerExistingUserTests(){
         User user = User.builder().email("aakash123@gmail.com").firstName("aakash").lastName("rad").password("password").build();
         ModelAndView modelAndView = new ModelAndView();
         HttpServletRequest httpServletRequest = mock(HttpServletRequest.class);
