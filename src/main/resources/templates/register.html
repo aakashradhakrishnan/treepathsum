@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>SignUp</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css" />
+</head>
+<body>
+<div class="main-area">
+<h1 th:text="#{label.form.title}">Register Now</h1>
+<form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="POST" enctype="utf8">
+    <div th:if="${confirmationMessage}" class="alert alert-success"
+         role="alert" th:text=${confirmationMessage}></div>
+    <div>
+        <label th:text="#{label.user.firstName}">first</label>
+        <input th:field="*{firstName}"/>
+    </div>
+    <div>
+        <label th:text="#{label.user.lastName}">last</label>
+        <input th:field="*{lastName}"/>
+    </div>
+    <div>
+        <label th:text="#{label.user.email}">email</label>
+        <input type="email" th:field="*{email}"/>
+    </div>
+    <div>
+        <label th:text="#{label.user.password}">password</label>
+        <input type="password" th:field="*{password}"/>
+    </div>
+    <button type="submit" th:text="#{label.form.submit}">submit</button>
+</form>
+<a th:href="@{/login}" th:text="#{label.form.loginLink}">login</a>
+</div>
+</body>
+
+</html>

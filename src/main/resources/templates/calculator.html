@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+</head>
+<body>
+<div class="main-area">
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+<form action="#" th:action="@{/calculate}" th:object="${treeSumRequest}" method="POST" enctype="utf8">
+    <p>Enter the pre-order traversal of a tree to serialize it and include "null" whereever there is an empty child. You can enter a comma seperated string in the text box provided below. Example: 1,2,null,null,3,4,null,null,5. Output will be shown in a div below.</p>
+    <div>
+        <label th:text="#{label.tree}">tree</label>
+        <input type="text" th:field="*{tree}"/>
+    </div>
+    <div th:if="${confirmationMessage}" class="alert alert-success"
+         role="alert" th:text=${confirmationMessage}></div>
+    <button type="submit" th:text="#{label.form.submit}">submit</button>
+</form>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</div>
+</body>
+</html>
