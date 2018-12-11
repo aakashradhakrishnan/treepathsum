@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         org.springframework.security.core.userdetails.User.UserBuilder userBuilder = null;
         if(user!=null) {
             userBuilder = org.springframework.security.core.userdetails.User.withUsername(user.getEmail());
-            userBuilder.password(new BCryptPasswordEncoder().encode(user.getPassword()));
+            userBuilder.password(user.getPassword());
             userBuilder.roles("ADMIN");
             //return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true, true, true, defaultRoles);
         }else{

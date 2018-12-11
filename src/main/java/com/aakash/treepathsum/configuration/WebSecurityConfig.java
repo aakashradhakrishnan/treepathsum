@@ -37,7 +37,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //auth.
                 //jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select email,password,enabled from userlist where email=?").authoritiesByUsernameQuery();
 
-        auth.userDetailsService(userDetailsService()).passwordEncoder(encoder());
+        auth.authenticationProvider(authenticationProvider());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+        daoAuthenticationProvider.setPasswordEncoder(encoder());
+        return daoAuthenticationProvider;
     }
 
     @Override
@@ -60,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(11);
+        return new BCryptPasswordEncoder();
     }
 
 }

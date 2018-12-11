@@ -8,14 +8,14 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
-@RunWith(MockitoJUnitRunner.class)
-@WebMvcTest(TreeController.class)
-public class TreeControllerTests {
-
-    @InjectMocks
-    TreeController treeController;
-
-    @Mock
-    TreeService treeService;
-
-}
+//@RunWith(MockitoJUnitRunner.class)
+//@WebMvcTest(TreeController.class)
+//public class TreeControllerTests {
+//
+//    @InjectMocks
+//    TreeController treeController;
+//
+//    @Mock
+//    TreeService treeService;
+//
+//}

@@ -3,6 +3,7 @@ package com.aakash.treepathsum.controller;
 import com.aakash.treepathsum.model.User;
 import com.aakash.treepathsum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class UserController {
     private UserService userService;
+    private PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, PasswordEncoder passwordEncoder){
         this.userService = userService;
+        this.bCryptPasswordEncoder = passwordEncoder;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -35,6 +38,7 @@ public class UserController {
         User existingUser = userService.findByEmail(user.getEmail());
 
         if(existingUser==null) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userService.registerUser(user);
             modelAndView.addObject("confirmationMessage", "User has been added.");
             modelAndView.setViewName("register");

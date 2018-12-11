@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,6 +29,9 @@ public class UserControllerTests {
     @Mock
     UserService userService;
 
+    @Mock
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Test
     public void registerValidUserTests(){
         User user = User.builder().email("aakash123@gmail.com").firstName("aakash").lastName("rad").password("password").build();
@@ -37,6 +41,7 @@ public class UserControllerTests {
         BindingResult bindingResult = mock(BindingResult.class);
 
         when(userService.findByEmail("aakash123@gmail.com")).thenReturn(null);
+        when(bCryptPasswordEncoder.encode(user.getPassword())).thenReturn("randomhash");
         doNothing().when(userService).registerUser(user);
 
         ModelAndView expectedMVC = userController.registerUser(modelAndView, user, httpServletRequest, bindingResult);
